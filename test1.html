@@ -7,9 +7,9 @@
 <script>
 'use strict';
 class Pocemon {
-	constructor(name, level) {
-		this.name = name;
-		this.level = level;
+	constructor(pocemon) {
+		this.name = pocemon.name;
+		this.level = pocemon.level;
 	}
 	
 	show() {
@@ -18,11 +18,13 @@ class Pocemon {
 }
 
 class PocemonList {
-	constructor( ...params) {
+	constructor(params = []) {
+		console.log('params:', params);
 		this.list = params;
 	}
-	add(member) {
-		this.list.push(new Pocemon(member));
+	add(obj) {
+		
+		this.list.push(new Pocemon(obj));		
 	}
 	delete(index) {
 		if(index < 0 || index >= this.list.length) {
@@ -34,43 +36,70 @@ class PocemonList {
 		console.log('List of pocemones is:',this.list);
 		console.log('Number of pocemones in the list:', this.list.length);
 	}
-	get member(index) {
+	get(index) {
 		if(index < 0 || index >= this.list.length) {
 			console.log('Pocemone with index ${index} do not exist');
 			}
 			else return this.list[index];
 		
 	}
+	valueOf(index) {
+		return this.list[index].level;
+	}
+	max() {
+		console.log(this.valueOf(1));
+		if (this.list.length == 0){ return 'List is empty';}
+		if (this.list.length == 1){ return this.list[0];}
+		var maxVal = this.list[0];
+		for (let i = 1; i < this.list.length; i++) {
+			if (maxVal.level < this.valueOf(i)) {
+				maxVal = this.list[i];
+			}
+		}
+		return maxVal;
+	}
 }
 
+const pocemonsA = [
+	{name: 'Molly', level: 1},
+	{name: 'Mike', level: 0},
+	{name: 'Anny', level: 2}
+];
 
-var second = new Pocemon('Molly', 1);
-var first = new Pocemon('Mike', 0);
-var third = new Pocemon('Anny', 2);
-var lost = new PocemonList(first, second, third);
+const pocemonsB = [
+	{name: 'Gun', level: 12},
+	{name: 'Noni', level: 10},
+	{name: 'Anzor', level: 7},
+	{name: 'Sumo', level: 9}
+];
+
+
+const lostList = pocemonsA.map(value => new Pocemon(value));
+console.log('lostList:', lostList);
+const lost =new PocemonList(lostList);
+console.log('Lost pocemones list');
+lost.show();
+
 var found = new PocemonList();
+pocemonsB.forEach((value, index, pocemonsB) => found.add(value));
+console.log('Found pocemones list');
+found.show();
+
+
 var pocemoneTransfer = function (list1, list2, index) {
 	//list1 - where you transfer {found}
 	//list2 - from whwrw you transfer (lost)
 	//index - index of pocemone from list2
-	list1.add(list2.member(index));
+	list1.add(list2.get(index));
 	list2.delete(index);
 }
-
-first.show();
-console.log('Lost pocemones list');
-lost.show();
-found.add('Nony', 3);
-found.add('Pit', 2);
-console.log('Found pocemones list');
-found.show();
-
 console.log('Transfer pocemone with index 2 from lost to found');
 pocemoneTransfer(found, lost, 2);
 console.log('Found pocemones list');
 found.show();
 console.log('Lost pocemones list');
 lost.show();
+console.log('Maximum level of found is', found.max());
 </script>
 </body>
 </html>
