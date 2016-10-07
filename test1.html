@@ -1,0 +1,70 @@
+<! DOCTYPE HTML >
+<html>
+<head>
+<title>ES2015</title>
+</head>
+<body>
+<script>
+'use strict';
+class Pocemon {
+	constructor(name, level) {
+		this.name = name;
+		this.level = level;
+	}
+	
+	show() {
+		console.log('Name:', this.name, 'Level: ', this.level);
+	}
+}
+
+class PocemonList {
+	constructor( ...params) {
+		this.list = params;
+	}
+	add(member) {
+		this.list.push(new Pocemon(member));
+	}
+	delete(index) {
+		if(index < 0 || index >= this.list.length) {
+			console.log('Pocemone with index ', index, ' do not exist');
+			}
+		else this.list.splice(index, 1);
+	}
+	show(){
+		console.log('List of pocemones is:',this.list);
+		console.log('Number of pocemones i the list:', this.list.length);
+	}
+	get(index) {
+		if(index < 0 || index >= this.list.length) {
+			console.log('Pocemone with index ', index, ' do not exist');
+			}
+			else return this.list[index];
+		
+	}
+}
+
+
+var second = new Pocemon('Molly', 1);
+var first = new Pocemon('Mike', 0);
+var third = new Pocemon('Anny', 2);
+var lost = new PocemonList(first, second, third);
+var found = new PocemonList();
+
+first.show();
+console.log('Lost pocemones list');
+lost.show();
+found.add('Nony', 3);
+found.add('Pit', 2);
+console.log('Found pocemones list');
+found.show();
+
+console.log('Transfer pocemone with index 3 from lost to found');
+found.add(lost.get(2));
+console.log('Found pocemones list');
+found.show();
+lost.delete(2);
+console.log('Lost pocemones list');
+lost.show();
+</script>
+</body>
+</html>
