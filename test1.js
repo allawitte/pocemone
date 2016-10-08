@@ -1,10 +1,3 @@
-<! DOCTYPE HTML >
-<html>
-<head>
-<title>ES2015</title>
-</head>
-<body>
-<script>
 'use strict';
 class Pocemon {
 	constructor(pocemon) {
@@ -14,6 +7,9 @@ class Pocemon {
 	
 	show() {
 		console.log('Name:', this.name, 'Level: ', this.level);
+	}
+	valueOf() {
+		return this.level;
 	}
 }
 
@@ -43,16 +39,13 @@ class PocemonList {
 			else return this.list[index];
 		
 	}
-	valueOf(index) {
-		return this.list[index].level;
-	}
 	max() {
-		console.log(this.valueOf(1));
+		
 		if (this.list.length == 0){ return 'List is empty';}
 		if (this.list.length == 1){ return this.list[0];}
 		var maxVal = this.list[0];
 		for (let i = 1; i < this.list.length; i++) {
-			if (maxVal.level < this.valueOf(i)) {
+			if (maxVal.valueOf() < this.list[i].valueOf()) {
 				maxVal = this.list[i];
 			}
 		}
@@ -100,6 +93,3 @@ found.show();
 console.log('Lost pocemones list');
 lost.show();
 console.log('Maximum level of found is', found.max());
-</script>
-</body>
-</html>
