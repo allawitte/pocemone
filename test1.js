@@ -1,8 +1,11 @@
 'use strict';
 class Pocemon {
-	constructor(pocemon) {
-		this.name = pocemon.name;
-		this.level = pocemon.level;
+	constructor(...params) {
+		if (params.length == 1 ) {
+			params = params[0];
+		}
+		this.name = params.name;
+		this.level = params.level;
 	}
 	
 	show() {
@@ -65,9 +68,12 @@ const pocemonsB = [
 	{name: 'Anzor', level: 7},
 	{name: 'Sumo', level: 9}
 ];
+var x = new Pocemon('Ivan', 9000);
+x.show();
 
 
 const lostList = pocemonsA.map(value => new Pocemon(value));
+
 console.log('lostList:', lostList);
 const lost =new PocemonList(lostList);
 console.log('Lost pocemones list');
@@ -93,3 +99,4 @@ found.show();
 console.log('Lost pocemones list');
 lost.show();
 console.log('Maximum level of found is', found.max());
+
