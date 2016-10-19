@@ -3,9 +3,18 @@ class Pocemon {
 	constructor(...params) {
 		if (params.length == 1 ) {
 			params = params[0];
+			if (typeof params === "object") {
+				this.name = params.name;
+				this.level = params.level;
+			}
+			else console.log('Wrong Pocemon params');
 		}
-		this.name = params.name;
-		this.level = params.level;
+		else if ( params.length == 2){
+			this.name = params[0];
+			this.level = params[1];
+		}
+		else console.log('Wrong Pocemon params');
+
 	}
 	
 	show() {
