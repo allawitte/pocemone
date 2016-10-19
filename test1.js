@@ -13,7 +13,7 @@ class Pocemon {
 			this.name = params[0];
 			this.level = params[1];
 		}
-		else console.log('Wrong Pocemon params');  
+		else console.log('Wrong Pocemon params');
 
 	}
 	
@@ -26,8 +26,10 @@ class Pocemon {
 }
 
 class PocemonList {
-	constructor(params = []) {
-		console.log('params:', params);
+	constructor(...params) {
+		if ( params[0] instanceof Array ) {
+			params = params[0];
+		}
 		this.list = params;
 	}
 	add(obj) {
