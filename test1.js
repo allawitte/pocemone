@@ -13,7 +13,7 @@ class Pocemon {
 			this.name = params[0];
 			this.level = params[1];
 		}
-		else console.log('Wrong Pocemon params');
+		else console.log('Wrong Pocemon params');  
 
 	}
 	
