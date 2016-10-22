@@ -1,19 +1,22 @@
 'use strict';
-class Pocemon {
+class Pokemon {
 	constructor(...params) {
+
 		if (params.length == 1 ) {
 			params = params[0];
+			console.log('original is: ', params);
 			if (typeof params === "object") {
 				this.name = params.name;
 				this.level = params.level;
 			}
-			else console.log('Wrong Pocemon params');
+			else console.log('Wrong Pokemon params');
 		}
 		else if ( params.length == 2){
 			this.name = params[0];
 			this.level = params[1];
 		}
-		else console.log('Wrong Pocemon params');
+		else console.log('Wrong Pokemon params');
+		console.log('this: ', this);
 
 	}
 	
@@ -25,8 +28,9 @@ class Pocemon {
 	}
 }
 
-class PocemonList {
+class PokemonList {
 	constructor(...params) {
+		console.log('params: ', params);
 		if ( params[0] instanceof Array ) {
 			params = params[0];
 		}
@@ -34,21 +38,26 @@ class PocemonList {
 	}
 	add(obj) {
 		
-		this.list.push(new Pocemon(obj));		
+		this.list.push(new Pokemon(obj));
 	}
 	delete(index) {
 		if(index < 0 || index >= this.list.length) {
-			console.log('Pocemone with index ${index} do not exist');
+			console.log('Pokemone with index ${index} do not exist');
 			}
 		else this.list.splice(index, 1);
 	}
 	show(){
-		console.log('List of pocemones is:',this.list);
-		console.log('Number of pocemones in the list:', this.list.length);
+		console.log('Number of pocemons in the list:', this.list.length);
+		for ( let i = 0; i < this.list.length; i ++) {
+
+			console.log(` name: ${this.list[i].name} , level: ${this.list[i].level} `);
+		}
+		//console.log('List of pocemons is:',this.list);
+
 	}
 	get(index) {
 		if(index < 0 || index >= this.list.length) {
-			console.log('Pocemone with index ${index} do not exist');
+			console.log('Pokemone with index ${index} do not exist');
 			}
 			else return this.list[index];
 		
@@ -79,18 +88,18 @@ const pocemonsB = [
 	{name: 'Anzor', level: 7},
 	{name: 'Sumo', level: 9}
 ];
-var x = new Pocemon('Ivan', 9000);
+var x = new Pokemon('Ivan', 9000);
 x.show();
 
 
-const lostList = pocemonsA.map(value => new Pocemon(value));
+const lostList = pocemonsA.map(value => new Pokemon(value));
 
 console.log('lostList:', lostList);
-const lost =new PocemonList(lostList);
+const lost =new PokemonList(lostList);
 console.log('Lost pocemones list');
 lost.show();
 
-var found = new PocemonList();
+var found = new PokemonList();
 pocemonsB.forEach((value, index, pocemonsB) => found.add(value));
 console.log('Found pocemones list');
 found.show();
