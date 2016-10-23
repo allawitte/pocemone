@@ -16,12 +16,11 @@ class Pokemon {
 			this.level = params[1];
 		}
 		else console.log('Wrong Pokemon params');
-		console.log('this: ', this);
 
 	}
 	
 	show() {
-		console.log('Name:', this.name, 'Level: ', this.level);
+		console.log(`Name: ${this.name}, Level: ${this.level}`);
 	}
 	valueOf() {
 		return this.level;
@@ -35,6 +34,7 @@ class PokemonList {
 			params = params[0];
 		}
 		this.list = params;
+		console.log('list obj', this.list);
 	}
 	add(obj) {
 		
@@ -47,11 +47,11 @@ class PokemonList {
 		else this.list.splice(index, 1);
 	}
 	show(){
-		console.log('Number of pocemons in the list:', this.list.length);
-		for ( let i = 0; i < this.list.length; i ++) {
+		console.log(`Number of pocemons in the list: ${this.list.length}`);
+		this.list.forEach(item => {
 
-			console.log(` name: ${this.list[i].name} , level: ${this.list[i].level} `);
-		}
+			console.log(` name: ${item.name} , level: ${item.level} `);
+		})
 		//console.log('List of pocemons is:',this.list);
 
 	}
@@ -96,6 +96,10 @@ const lostList = pocemonsA.map(value => new Pokemon(value));
 
 console.log('lostList:', lostList);
 const lost =new PokemonList(lostList);
+const list =new PokemonList();
+
+list.add(new Pokemon('Poky', 1));
+list.show();
 console.log('Lost pocemones list');
 lost.show();
 
