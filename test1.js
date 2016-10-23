@@ -4,7 +4,6 @@ class Pokemon {
 
 		if (params.length == 1 ) {
 			params = params[0];
-			console.log('original is: ', params);
 			if (typeof params === "object") {
 				this.name = params.name;
 				this.level = params.level;
@@ -22,56 +21,36 @@ class Pokemon {
 	show() {
 		console.log(`Name: ${this.name}, Level: ${this.level}`);
 	}
-	valueOf() {
-		return this.level;
-	}
+	
 }
 
-class PokemonList {
-	constructor(...params) {
-		console.log('params: ', params);
-		if ( params[0] instanceof Array ) {
-			params = params[0];
-		}
-		this.list = params;
-		console.log('list obj', this.list);
-	}
+class PokemonList extends Array {
+
 	add(obj) {
 		
-		this.list.push(new Pokemon(obj));
+		this.push(new Pokemon(obj));
 	}
-	delete(index) {
-		if(index < 0 || index >= this.list.length) {
-			console.log('Pokemone with index ${index} do not exist');
-			}
-		else this.list.splice(index, 1);
-	}
+
 	show(){
-		console.log(`Number of pocemons in the list: ${this.list.length}`);
-		this.list.forEach(item => {
+
+		console.log(`Number of pocemons in the list: ${this.length}`);
+		this.forEach(item => {
 
 			console.log(` name: ${item.name} , level: ${item.level} `);
 		})
 		//console.log('List of pocemons is:',this.list);
 
 	}
-	get(index) {
-		if(index < 0 || index >= this.list.length) {
-			console.log('Pokemone with index ${index} do not exist');
-			}
-			else return this.list[index];
-		
-	}
+
 	max() {
 		
-		if (this.list.length == 0){ return 'List is empty';}
-		if (this.list.length == 1){ return this.list[0];}
-		var maxVal = this.list[0];
-		for (let i = 1; i < this.list.length; i++) {
-			if (maxVal.valueOf() < this.list[i].valueOf()) {
-				maxVal = this.list[i];
-			}
-		}
+		if (this.length == 0){ return 'List is empty';}
+		if (this.length == 1){ return this.list[0];}
+		var maxVal = this[0];
+		this.forEach(item => {if (maxVal.level < item.level) {
+			maxVal = this[i];
+		}})
+
 		return maxVal;
 	}
 }
@@ -95,7 +74,8 @@ x.show();
 const lostList = pocemonsA.map(value => new Pokemon(value));
 
 console.log('lostList:', lostList);
-const lost =new PokemonList(lostList);
+const lost =new PokemonList(...lostList);
+console.log('New');
 const list =new PokemonList();
 
 list.add(new Pokemon('Poky', 1));
@@ -113,8 +93,8 @@ var pocemoneTransfer = function (list1, list2, index) {
 	//list1 - where you transfer {found}
 	//list2 - from whwrw you transfer (lost)
 	//index - index of pocemone from list2
-	list1.add(list2.get(index));
-	list2.delete(index);
+	list1.add(list2[index]);
+	list2.splice(index, 1);
 }
 console.log('Transfer pocemone with index 2 from lost to found');
 pocemoneTransfer(found, lost, 2);
@@ -123,4 +103,5 @@ found.show();
 console.log('Lost pocemones list');
 lost.show();
 console.log('Maximum level of found is', found.max());
+
 
