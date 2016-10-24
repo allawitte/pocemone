@@ -21,7 +21,7 @@ class Pokemon {
 	show() {
 		console.log(`Name: ${this.name}, Level: ${this.level}`);
 	}
-	
+
 }
 
 class PokemonList extends Array {
@@ -52,6 +52,11 @@ class PokemonList extends Array {
 		}})
 
 		return maxVal;
+	}
+	valueOf() {
+		let summ = 0;
+		this.forEach(item => { summ = summ + item.level });
+		return summ;
 	}
 }
 
@@ -87,6 +92,7 @@ var found = new PokemonList();
 pocemonsB.forEach((value, index, pocemonsB) => found.add(value));
 console.log('Found pocemones list');
 found.show();
+console.log(`The value is ${found.valueOf()}`);
 
 
 var pocemoneTransfer = function (list1, list2, index) {
