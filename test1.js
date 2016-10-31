@@ -36,8 +36,8 @@ class PokemonList extends Array {
 		console.log(`Number of pocemons in the list: ${this.length}`);
 		this.forEach(item => {
 
-			console.log(` name: ${item.name} , level: ${item.level} `);
-		})
+			console.log(item);
+		});
 		//console.log('List of pocemons is:',this.list);
 
 	}
@@ -45,18 +45,18 @@ class PokemonList extends Array {
 	max() {
 		
 		if (this.length == 0){ return 'List is empty';}
-		if (this.length == 1){ return this.list[0];}
+		if (this.length == 1){ return this[0];}
 		var maxVal = this[0];
 		this.forEach(item => {if (maxVal.level < item.level) {
 			maxVal = this[i];
-		}})
+		}});
 
 		return maxVal;
 	}
 	valueOf() {
-		let summ = 0;
-		this.forEach(item => { summ = summ + item.level });
-		return summ;
+		if (this.length == 0){ return null;}
+		if (this.length == 1){ return this[0].name + ', ' + this[0].level;}
+		return this.max().name + ', ' + this.max().level;
 	}
 }
 
@@ -109,5 +109,7 @@ found.show();
 console.log('Lost pocemones list');
 lost.show();
 console.log('Maximum level of found is', found.max());
+console.log(lost.valueOf());
+console.log(found.valueOf());
 
 
