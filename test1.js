@@ -55,8 +55,8 @@ class PokemonList extends Array {
 	}
 	valueOf() {
 		if (this.length == 0){ return null;}
-		if (this.length == 1){ return this[0].name + ', ' + this[0].level;}
-		return this.max().name + ', ' + this.max().level;
+
+		return this.max().level;
 	}
 }
 
