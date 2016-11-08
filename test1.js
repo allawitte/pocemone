@@ -35,8 +35,7 @@ class PokemonList extends Array {
 
 		console.log(`Number of pocemons in the list: ${this.length}`);
 		this.forEach(item => {
-
-			console.log(item);
+			item.show();
 		});
 		//console.log('List of pocemons is:',this.list);
 
@@ -54,9 +53,11 @@ class PokemonList extends Array {
 		return maxVal;
 	}
 	valueOf() {
-		if (this.length == 0){ return null;}
-
-		return this.max().level;
+		let res = [];
+		this.forEach( item => {
+			res.push(item.name + ':' + item.level);
+		});
+		return res;
 	}
 }
 
@@ -82,6 +83,7 @@ console.log('lostList:', lostList);
 const lost =new PokemonList(...lostList);
 console.log('New');
 const list =new PokemonList();
+
 
 list.add(new Pokemon('Poky', 1));
 list.show();
